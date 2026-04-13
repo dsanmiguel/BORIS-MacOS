@@ -443,16 +443,27 @@ def run_plugin(self, plugin_name):
 
     self.plugin_visu: list = []
     for result in plugin_results:
-        if isinstance(result, str):
+        result_title = plugin_name
+        result_payload = result
+
+        if (
+            isinstance(result, tuple)
+            and len(result) == 2
+            and isinstance(result[0], str)
+            and isinstance(result[1], (str, pd.DataFrame))
+        ):
+            result_title, result_payload = result
+
+        if isinstance(result_payload, str):
             self.remove_closed_results_objects()
             self.results_objects.append(dialog.Results_widget())
-            self.results_objects[-1].setWindowTitle(plugin_name)
+            self.results_objects[-1].setWindowTitle(result_title)
             self.results_objects[-1].ptText.clear()
-            self.results_objects[-1].ptText.appendPlainText(result)
+            self.results_objects[-1].ptText.appendPlainText(result_payload)
             self.results_objects[-1].show()
-        elif isinstance(result, pd.DataFrame):
+        elif isinstance(result_payload, pd.DataFrame):
             self.remove_closed_results_objects()
-            self.results_objects.append(view_df.View_df(plugin_name, f"{plugin_version} ({plugin_version_date})", result))
+            self.results_objects.append(view_df.View_df(result_title, f"{plugin_version} ({plugin_version_date})", result_payload))
             self.results_objects[-1].show()
         else:
             # result is not str nor dataframe
@@ -460,8 +471,9 @@ def run_plugin(self, plugin_name):
                 None,
                 cfg.programName,
                 (
-                    f"Plugin returns an unknown object type: {type(result)}\n\n"
-                    "Plugins must return str and/or Pandas Dataframes.\n"
+                    f"Plugin returns an unknown object type: {type(result_payload)}\n\n"
+                    "Plugins must return str, Pandas Dataframes,\n"
+                    "or tuples formatted as (title, str/DataFrame).\n"
                     "Check the plugin code."
                 ),
                 QMessageBox.StandardButton.Ok | QMessageBox.StandardButton.Default,
