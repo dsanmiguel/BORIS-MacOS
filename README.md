@@ -4,6 +4,19 @@ BORIS (Behavioral Observation Research Interactive Software)
 
 ![BORIS logo](https://github.com/olivierfriard/BORIS/blob/master/boris/icons/logo_boris.png?raw=true)
 
+## About This Fork
+
+This repository is a macOS-focused fork of the BORIS project. It is intended to address macOS-specific issues related to `mpv`, IPC control, and playback behavior.
+
+The goal of this fork is to keep changes as small as possible while improving BORIS on macOS, rather than diverging substantially from upstream.
+
+If you encounter a problem specific to this fork, please open an issue in this repository and I will do my best to resolve it quickly.
+
+Unless noted otherwise, the documentation below is reproduced from the official BORIS repository:
+https://github.com/olivierfriard/BORIS/
+
+---
+
 BORIS is an easy-to-use event logging software for video/audio coding or live observations.
 
 BORIS is a free and open-source software available for GNU/Linux, Windows and macOS.
@@ -52,7 +65,9 @@ Some [video tutorials](https://www.boris.unito.it/video_tutorials/) are availabl
 # Bug reports and feature requests
 
 
-To search for bugs, report them or request a feature, please use the [GitHub issues tracker](https://github.com/olivierfriard/BORIS/issues)
+For issues specific to this macOS fork, please use this repository's issue tracker.
+
+For general BORIS bugs or feature requests, please use the official [GitHub issues tracker](https://github.com/olivierfriard/BORIS/issues).
 
 
 
